@@ -1,0 +1,287 @@
+<!doctype html><html lang="pt"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light">
+<title>NosAviário Pro</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}button{touch-action:manipulation;cursor:pointer;user-select:none;-webkit-user-select:none}input,select{font-size:16px}body{margin:0;font:14px Arial;background:#eef5f5;color:#17343a}header{background:#145c50;color:#fff;text-align:center;padding:16px;position:sticky;top:0;z-index:5}h1{margin:0;font-size:21px}nav{display:flex;gap:6px;overflow:auto;background:#fff;padding:8px;position:sticky;top:67px;z-index:4}button{border:0;border-radius:8px;padding:9px 12px;background:#145c50;color:#fff;font-weight:bold}button:disabled{opacity:.5;cursor:not-allowed}nav button{background:#e5eeee;color:#145c50;white-space:nowrap}nav .on{background:#145c50;color:#fff}main{max-width:1150px;margin:auto;padding:12px}.tab{display:none}.tab.on{display:block}.card{background:#fff;padding:14px;border-radius:14px;margin-bottom:12px;box-shadow:0 2px 8px #0001}.row{display:flex;gap:8px;flex-wrap:wrap}.f{flex:1;min-width:140px}label{display:block;font-size:12px;font-weight:bold;color:#587078;margin:6px 0 4px}input,select{width:100%;padding:9px;border:1px solid #cbd8db;border-radius:8px}input:disabled,select:disabled{background:#edf1f1;color:#667;opacity:1}.wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:1050px}th,td{border:1px solid #d5dfe1;padding:7px;text-align:center;font-size:12px}th{background:#dcece8}.week{background:#f5faf9;border-left:5px solid #145c50;padding:10px;border-radius:8px;margin:8px 0}.badge{display:inline-block;padding:5px 8px;border-radius:15px;background:#e8eeee;margin:2px;font-size:11px}.ok{background:#d8f0df;color:#17652d}.wait{background:#fff0c7;color:#795600}.stat{flex:1;min-width:120px;text-align:center;background:#f4f8f8;padding:12px;border-radius:9px}.stat b{display:block;font-size:23px}.muted{font-size:12px;color:#687a80}.danger{background:#b23b3b}.login{max-width:430px;margin:25px auto;padding:12px}.audit{font-size:11px;background:#f7f9f9;padding:7px;border-radius:7px;margin-top:5px}
+
+.syncbox{border:1px solid #b8d5d1;border-radius:12px;padding:12px;margin-top:10px;background:#f8ffff}
+.syncok{color:#087443;font-weight:bold}.syncwait{color:#9a6500;font-weight:bold}.syncerr{color:#b42318;font-weight:bold}
+.smallbtn{padding:8px 10px;font-size:13px}
+
+/* V9 */
+.day-before-lot{opacity:.55;background:#f3f3f3}
+.day-before-lot td{color:#777}
+.today-row{outline:2px solid #2b8a78;outline-offset:-2px}
+.status-stack{display:flex;flex-direction:column;gap:3px;font-size:12px}
+.badge{display:inline-block;border-radius:999px;padding:3px 7px;font-size:11px;font-weight:700}
+.badge.ok{background:#dff6e9;color:#087443}.badge.wait{background:#fff0c7;color:#8a5a00}
+.badge.err{background:#ffe0e0;color:#a11}.badge.none{background:#e9eef0;color:#53636a}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.kpi{background:#f7ffff;border-radius:12px;padding:10px;text-align:center}.kpi b{display:block;font-size:20px}
+.week-card{border-left:4px solid #2b8a78}
+.month-title{margin:0 0 12px;text-align:center;background:#145c50;color:#fff;padding:12px;border-radius:10px;font-size:18px;letter-spacing:.5px}.records-table td:first-child{font-weight:bold;min-width:105px}.records-table .weekday{display:block;font-size:11px;font-weight:normal;color:#687a80;margin-top:3px}.records-table .shift-name{font-weight:700;color:#145c50}.records-table .prev-month{background:#f2f5f5}.records-table .before-lot{background:#f5f5f5;color:#9aa3a5}.records-table .week-start td{border-top:3px solid #8eb9b1}
+.view-switch{display:flex;gap:8px;margin:0 0 12px}.view-switch button{flex:1}.view-switch button.active{background:#0d4039}.day-cards{display:grid;grid-template-columns:1fr;gap:10px}.day-card{border:1px solid #d5e2e1;border-radius:12px;overflow:hidden;background:#fff}.day-card.before-lot{opacity:.6;background:#f4f5f5}.day-card-head{background:#e3f0ee;padding:11px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px}.day-card-head strong{font-size:15px}.day-card-body{padding:12px}.shift-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:10px}.shift-box{background:#f3f8f7;border-radius:8px;padding:8px 5px;text-align:center;min-width:0}.shift-box small{display:block;color:#687a80;margin-bottom:4px}.shift-box b{font-size:12px;overflow-wrap:anywhere}.day-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.detail-box{border:1px solid #e0e8e7;border-radius:8px;padding:9px;min-width:0}.detail-box small{display:block;color:#687a80;margin-bottom:5px}.detail-box div{overflow-wrap:anywhere}.day-card .status-stack{margin-top:9px}.summary-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.summary-kpi{background:#f2f8f7;border-radius:12px;padding:12px;min-width:0}.summary-kpi small{display:block;color:#587078;font-weight:bold}.summary-kpi b{display:block;font-size:24px;margin:5px 0}.summary-kpi .sub{font-size:11px;color:#687a80}.pending-panel{background:#fff8e6;border:1px solid #f1d995;border-radius:12px;padding:12px;margin-top:12px}.pending-list{display:grid;gap:7px}.pending-line{display:flex;justify-content:space-between;gap:8px;align-items:center}.summary-today{margin-top:12px}
+@media(min-width:760px){.day-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.summary-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+
+/* Tema profissional moderno: azul-marinho, verde-petróleo e acento dourado */
+:root{--navy:#142b4a;--teal:#087e8b;--teal-dark:#075e66;--gold:#e0ad42;--line:#d7e2eb;--ink:#172b3a;--soft:#f2f6fa}
+body{background:#eef3f8;color:var(--ink)}header{background:linear-gradient(120deg,var(--navy),var(--teal-dark));border-bottom:3px solid var(--gold)}nav{box-shadow:0 3px 12px #142b4a12}nav button{background:#eaf0f6;color:var(--navy)}nav .on,button{background:var(--teal-dark);color:#fff}button{transition:filter .15s,transform .15s}button:hover{filter:brightness(1.08)}button:active{transform:translateY(1px)}.card{border:1px solid #e1e8ef;box-shadow:0 5px 18px #142b4a0b}.month-title{background:linear-gradient(120deg,var(--navy),var(--teal));border-left:4px solid var(--gold)}th{background:#e3edf5;color:var(--navy)}.week{background:#f3f8fb;border-left-color:var(--teal)}.records-table .shift-name{color:var(--teal-dark)}.day-card{border-color:#d5e1eb;box-shadow:0 3px 10px #142b4a08}.day-card-head{background:#e6f0f6;border-bottom:1px solid #d5e1eb}.shift-box{background:#edf5f8}.summary-kpi{background:linear-gradient(145deg,#f7fbfd,#eaf4f6);border:1px solid #dbe8ed}.pending-panel{background:#fff8e9;border-color:#ecd59d}.view-switch button{background:#e8eef4;color:var(--navy);border:1px solid #d4e0e9}.view-switch button.active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);box-shadow:0 2px 6px #075e6630}.view-hidden{display:none!important}input:focus,select:focus{outline:2px solid #7fc4ca;outline-offset:1px;border-color:var(--teal)}
+</style></head><body>
+<header><h1>🐔 NosAviário <span style="font-weight:400;opacity:.8">PRO</span></h1><small id="session">Sem sessão</small></header>
+<div id="login" class="login"><div class="card"><h2>🔐 Acesso</h2><label>Usuário</label><select id="who"></select><label>PIN</label><input id="pin" type="password" inputmode="numeric"><button type="button" style="width:100%;margin-top:10px" onclick="login()">Entrar</button><p class="muted">Entre com o seu utilizador e PIN.</p></div></div>
+<div id="app" style="display:none"><nav id="nav"></nav><main>
+<section id="home" class="tab on"><div class="card"><h2>📊 Resumo</h2><div class="summary-kpis"><div class="summary-kpi"><small>🐥 Aves restantes</small><b id="sumRemaining">—</b><div class="sub" id="sumLotLabel">Lote actual</div></div><div class="summary-kpi"><small>⚰️ Óbitos confirmados</small><b id="totO">0</b><div class="sub" id="sumDeathsLabel">No mês seleccionado</div></div><div class="summary-kpi"><small>⏳ Tarefas pendentes</small><b id="sumPending">0</b><div class="sub">Registos por concluir hoje</div></div><div class="summary-kpi"><small>📅 Actividades de hoje</small><b id="sumActivities">0</b><div class="sub">Vitaminas e vacinas programadas</div></div></div><div id="lotResumo" class="week"></div><div class="pending-panel"><b>👥 Pendências da equipa</b><div id="teamPending" class="pending-list" style="margin-top:8px"></div></div></div><div class="card"><div class="row"><div class="f"><label>Mês</label><select id="month"></select></div><div class="f"><label>Ano</label><input id="year" type="number"></div></div></div><div class="card summary-today"><h3>📌 Actividades programadas para hoje</h3><div id="today"></div></div></section>
+<section id="records" class="tab"><div class="card"><h2>📋 Registo diário</h2><p class="muted">Óbitos: cada escalado guarda o seu número; os 3 devem confirmar o mesmo valor. Vitaminas e vacinas: os 3 devem marcar ✓. Registos dos escalados: apenas hoje ou ontem.</p></div><div class="card"><h3 id="monthTitle" class="month-title">MÊS</h3><div class="view-switch"><button type="button" id="cardsViewBtn" onclick="setRecordsView('cards')">▦ Cartões compactos</button><button type="button" id="tableViewBtn" onclick="setRecordsView('table')">☷ Tabela completa</button></div><div id="cardsView" class="day-cards"></div><div id="tableView" class="wrap"><table class="records-table"><thead><tr><th>Dia</th><th>Manhã</th><th>Tarde</th><th>Noite</th><th>Óbitos</th><th>Vitaminas</th><th>Vacinas</th><th>Estados</th></tr></thead><tbody id="tb"></tbody></table></div></div></section>
+<section id="mine" class="tab"><div class="card"><h2>✍️ Meus registros</h2><div id="mineBox"></div></div></section>
+<section id="adm" class="tab">
+<div class="card"><h2>🔐 Painel ADM</h2><p class="muted">Somente o ADM altera nomes, PINs, escala, vitaminas e vacinas.</p></div>
+<div class="card"><h2>👨‍💼 2 Supervisores</h2><p class="muted">Supervisores não entram na escala.</p><div id="supBox"></div></div>
+<div class="card"><h2>👷 6 Escalados</h2><p class="muted">Somente estes 6 participam da escala.</p><div id="workerBox"></div><button type="button" onclick="savePeople()">💾 Guardar cadastro</button></div>
+<div class="card"><h2>👥 Escala semanal</h2><p class="muted">A semana de trabalho é sempre de <b>segunda-feira a domingo</b>. A escala vale para todos os dias dessa semana, mesmo quando o lote começa no meio da semana.</p><div id="schedule"></div></div>
+<div class="card"><h2>🐥 Gestão do lote</h2><p class="muted">O lote começa na data em que os pintos entram. O dia do lote é independente da semana de trabalho.</p><div class="row"><div class="f"><label>Identificação do lote</label><input id="lotName" placeholder="Ex.: Lote 01"></div><div class="f"><label>Data de entrada dos pintos</label><input id="lotDate" type="date"></div><div class="f"><label>Quantidade inicial</label><input id="lotQty" type="number" min="0" placeholder="Ex.: 500"></div></div><button type="button" onclick="saveLot()">💾 Guardar lote</button><button type="button" onclick="clearLot()" class="danger">Limpar lote</button><div id="lotInfo"></div></div>
+<div class="card"><h2>💊 Programar vitamina</h2><div class="row"><div class="f"><label>Data</label><input id="vd" type="date"></div><div class="f"><label>Vitamina</label><input id="vn" placeholder="Ex.: Vitamina A"></div></div><button type="button" onclick="addPlan('vitamina')">+ Programar</button><div id="vitList"></div></div>
+<div class="card"><h2>💉 Programar vacina</h2><div class="row"><div class="f"><label>Data</label><input id="cd" type="date"></div><div class="f"><label>Vacina</label><input id="cn" placeholder="Ex.: Newcastle"></div></div><button type="button" onclick="addPlan('vacina')">+ Programar</button><div id="vacList"></div></div>
+<div class="card"><h2>🔎 Histórico / Auditoria</h2><div id="audit"></div></div>
+
+<div class="card" id="syncCard">
+<h2>☁️ Sincronização entre celulares</h2>
+<p class="muted">O app continua a funcionar offline. Quando houver Internet, os dados podem ser enviados/recebidos da base central.</p>
+<div class="syncbox">
+<label>Endereço do sincronizador</label>
+<input id="syncUrl" placeholder="Cole aqui o endereço do Google Apps Script">
+<label>Token de sincronização</label>
+<input id="syncToken" type="password" placeholder="Token definido no servidor">
+<div class="row">
+<button type="button" class="smallbtn" onclick="saveSyncConfig()">Guardar configuração</button>
+<button type="button" class="smallbtn" onclick="syncNow()">🔄 Sincronizar agora</button>
+</div>
+<p id="syncStatus" class="muted">Ainda não sincronizado.</p>
+</div>
+</div>
+<div class="card"><h2>🔑 PIN ADM</h2><input id="newPin" type="password" inputmode="numeric" placeholder="Novo PIN"><button type="button" onclick="changePin()">Alterar PIN</button></div>
+<div class="card"><h2>💾 Backup dos dados</h2><p class="muted">Guarde uma cópia para recuperar os registos caso o armazenamento do telemóvel seja apagado.</p><div class="row"><button type="button" onclick="backup()">⬇️ Exportar backup</button><div class="f"><input id="restoreFile" type="file" accept="application/json" onchange="restore(this)"></div></div></div>
+<div class="card"><button type="button" class="danger" onclick="resetAll()">Apagar todos os dados</button></div>
+</section></main></div>
+<script>
+const KEY='NOSAVIARIO_V9';let D=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('NOSAVIARIO_V7')||localStorage.getItem('NOSAVIARIO_V6')||localStorage.getItem('NOSAVIARIO_V5')||localStorage.getItem('NOSAVIARIO_V4')||'null')||{adminPin:'1234',supervisors:[{name:'',pin:'0000'},{name:'',pin:'0000'}],workers:Array.from({length:6},()=>({name:'',pin:'0000'})),schedule:{},deaths:{},plans:[],checks:{},audit:[],lot:{name:'',date:'',qty:0}};D.lot=D.lot||{name:'',date:'',qty:0};let me=null;
+const M=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],$=x=>document.getElementById(x);
+function save(){D._meta=D._meta||{};D._meta.updatedAt=new Date().toISOString();D._meta.deviceId=D._meta.deviceId||('dev-'+Math.random().toString(36).slice(2)+Date.now().toString(36));localStorage.setItem(KEY,JSON.stringify(D))}function E(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function days(m,y){return new Date(y,m+1,0).getDate()}function fmtDate(k){if(!k)return '—';const a=String(k).split('-');return a.length===3?`${a[2]}/${a[1]}/${a[0]}`:k}let recordsView='cards';function setRecordsView(view){recordsView=view==='table'?'table':'cards';applyRecordsView()}function applyRecordsView(){const cards=$('cardsView'),table=$('tableView'),cb=$('cardsViewBtn'),tb=$('tableViewBtn');if(!cards||!table)return;cards.classList.toggle('view-hidden',recordsView!=='cards');table.classList.toggle('view-hidden',recordsView!=='table');if(cb)cb.classList.toggle('active',recordsView==='cards');if(tb)tb.classList.toggle('active',recordsView==='table')}function todayKey(){let n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0')}function key(m,y,d){return y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0')}function mondayOf(k){let z=new Date(k+'T12:00:00'),day=z.getDay(),diff=day===0?-6:1-day;z.setDate(z.getDate()+diff);return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0')}function sundayOf(k){let z=new Date(k+'T12:00:00');z.setDate(z.getDate()+6);return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0')}function scheduleFor(k){let wk=mondayOf(k),s=D.schedule[wk];if(s)return s;return null}function W(d){return d}
+function init(){const monthEl=document.getElementById('month'),yearEl=document.getElementById('year'),whoEl=document.getElementById('who');monthEl.innerHTML=M.map((x,i)=>`<option value="${i}">${x}</option>`).join('');let n=new Date();monthEl.value=n.getMonth();yearEl.value=n.getFullYear();whoEl.innerHTML='<option value="A">Administrador</option><optgroup label="Supervisores">'+D.supervisors.map((u,i)=>`<option value="S${i}">${E(u.name||'Supervisor '+(i+1))}</option>`).join('')+'</optgroup><optgroup label="Escalados">'+D.workers.map((u,i)=>`<option value="W${i}">${E(u.name||'Escalado '+(i+1))}</option>`).join('')+'</optgroup>'}
+function login(){const whoEl=document.getElementById('who'),pinEl=document.getElementById('pin'),loginEl=document.getElementById('login'),appEl=document.getElementById('app'),navEl=document.getElementById('nav');let w=whoEl.value,p=pinEl.value.trim();if(w==='A'){if(p!==D.adminPin)return alert('PIN ADM incorreto');me={admin:true,id:'A',name:'Administrador'}}else if(w[0]==='S'){let i=+w.slice(1);if(p!==D.supervisors[i].pin)return alert('PIN incorreto');me={supervisor:true,id:'S'+i,name:D.supervisors[i].name||'Supervisor '+(i+1)}}else{let i=+w.slice(1);if(p!==D.workers[i].pin)return alert('PIN incorreto');me={worker:true,id:'W'+i,index:i,name:D.workers[i].name||'Escalado '+(i+1)}}loginEl.style.display='none';appEl.style.display='block';navEl.innerHTML=[['home','📊 Início'],['records','📋 Registos'],...(me.worker?[['mine','✍️ Meus registros']]:[]),...(me.admin?[['adm','🔐 ADM']]:[])].map((x,i)=>`<button type="button" class="${i?'':'on'}" onclick="tab('${x[0]}',this)">${x[1]}</button>`).join('');render()}
+function tab(id,b){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));$(id).classList.add('on');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');render()}
+function ids(d,m,y){let s=scheduleFor(key(m,y,d));return s?[s.m,s.t,s.n].filter(x=>x!==''&&x!=null).map(Number):[]}function pname(i){return i===''||i==null?'—':D.workers[+i]?.name||'Escalado '+(+i+1)}function plans(k,t){return D.plans.filter(x=>x.date===k&&x.type===t)}
+function confirmed(k,t){let z=new Date(k+'T12:00:00'),a=ids(z.getDate(),z.getMonth(),z.getFullYear()),c=D.checks[k+'_'+t]||{};return a.length===3&&a.every(i=>c['W'+i]===true)}
+function audit(t,d,s){D.audit.unshift({time:new Date().toLocaleString('pt-PT'),type:t,date:d,text:s});D.audit=D.audit.slice(0,300)}
+function render(){
+  $('session').textContent=me.admin?'Administrador • ADM':me.name+(me.supervisor?' • Supervisor':' • Escalado');
+  for(const fn of [homeR,recordsR,...(me.worker?[mineR]:[]),...(me.admin?[admR]:[])]){
+    try{fn()}catch(err){console.error('Erro ao actualizar a secção:',err);if(me.worker)$('mineBox').innerHTML='Não foi possível carregar os registos. Verifique a escala semanal ou volte a entrar na aplicação.'}
+  }
+}
+function homeR(){
+  let m=+$('month').value,y=+$('year').value,p=y+'-'+String(m+1).padStart(2,'0')+'-',o=0;
+  Object.keys(D.deaths).forEach(k=>{if(k.startsWith(p)&&D.deaths[k].confirmed)o+=+D.deaths[k].value});
+  $('totO').textContent=o;
+  let t=todayKey(),todayPlans=D.plans.filter(x=>x.date===t),pendingDeaths=0,divergences=0,pendingPlans=0;
+  Object.keys(D.deaths).forEach(k=>{const rec=D.deaths[k]||{},vals=Object.values(rec.por||{});if(!rec.confirmed&&vals.length>0){if(vals.length>1&&vals.some(x=>x!==vals[0]))divergences++;if(k===t)pendingDeaths++;}});
+  if(scheduleFor(t)&&!D.deaths[t]?.confirmed&&pendingDeaths===0)pendingDeaths=1;
+  todayPlans.forEach(x=>{if(!confirmed(t,x.type))pendingPlans++});
+  let pendingToday=pendingDeaths+pendingPlans;
+  $('sumPending').textContent=pendingToday;
+  $('sumActivities').textContent=todayPlans.length;
+  $('today').innerHTML=todayPlans.length?todayPlans.map(x=>`<div class="week"><span class="badge ${confirmed(t,x.type)?'ok':'wait'}">${x.type==='vitamina'?'💊 Vitamina':'💉 Vacina'}</span> <b>${E(x.name)}</b> — ${confirmed(t,x.type)?'Confirmada pelos 3':'A aguardar confirmação dos 3'}</div>`).join(''):'Nenhuma actividade programada para hoje.';
+  let lot=D.lot||{},info='',lotDeaths=0,rem='—';
+  if(lot.date){let ld=new Date(lot.date+'T12:00:00'),now=new Date(t+'T12:00:00'),age=Math.floor((now-ld)/86400000)+1;lotDeaths=Object.keys(D.deaths).filter(k=>k>=lot.date&&k<=t&&D.deaths[k].confirmed).reduce((n,k)=>n+(+D.deaths[k].value||0),0);rem=Math.max(0,(+lot.qty||0)-lotDeaths);info=`<b>🐥 ${E(lot.name||'Lote')}</b> • Entrada: ${fmtDate(lot.date)} • ${age>0?'Dia '+age+' do lote':'ainda não iniciado'}<br>Pintos iniciais: <b>${+lot.qty||0}</b> • Óbitos confirmados do lote: <b>${lotDeaths}</b> • Restantes: <b>${rem}</b>`;$('sumRemaining').textContent=Number(rem).toLocaleString('pt-PT');$('sumLotLabel').textContent=E(lot.name||'Lote actual');}
+  else{$('sumRemaining').textContent='—';$('sumLotLabel').textContent='Configure o lote no painel ADM';info='<span class="muted">Nenhum lote configurado.</span>';}
+  $('lotResumo').innerHTML=info;$('lotInfo').innerHTML=info;
+  const allPendingDeaths=Object.keys(D.deaths).filter(k=>{const r=D.deaths[k]||{};return !r.confirmed&&Object.keys(r.por||{}).length>0}).length;
+  $('teamPending').innerHTML=`<div class="pending-line"><span>Óbitos por confirmar</span><b>${allPendingDeaths}</b></div><div class="pending-line"><span>Divergências entre escalados</span><b>${divergences}</b></div><div class="pending-line"><span>Vitaminas/vacinas por confirmar hoje</span><b>${pendingPlans}</b></div>`;
+}
+
+function recordsR(){
+  let m=+$('month').value,y=+$('year').value,h='',cards='';
+  $('monthTitle').textContent=M[m].toLocaleUpperCase('pt-PT')+' '+y;
+  const first=new Date(y,m,1,12),last=new Date(y,m,days(m,y),12),start=new Date(first),dow=start.getDay();
+  start.setDate(start.getDate()+(dow===0?-6:1-dow));
+  const weekDays=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+  let previousWeek='';
+  for(let z=new Date(start);z<=last;z.setDate(z.getDate()+1)){
+    let d=z.getDate(),k=z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'),prev=z.getMonth()!==m,beforeLot=!!(D.lot?.date&&k<D.lot.date),active=!beforeLot,week=mondayOf(k),newWeek=week!==previousWeek;
+    previousWeek=week;
+    let s=active?(scheduleFor(k)||{}):{},o=active?(D.deaths[k]||{}):{},v=active?plans(k,'vitamina'):[],c=active?plans(k,'vacina'):[];
+    let showNames=active&&(z.getDay()===1||!!(D.lot?.date&&k===D.lot.date&&z.getDay()!==1)),dc=Object.keys(o.por||{}).length,vals=Object.values(o.por||{}),div=vals.length>1&&vals.some(x=>x!==vals[0]);
+    let os=o.confirmed?'<span class="badge ok">Óbitos: Confirmado</span>':div?'<span class="badge danger">Óbitos: Divergência</span>':dc?`<span class="badge wait">Óbitos: Pendente (${dc}/3)</span>`:'<span class="badge none">Óbitos: Sem registo</span>';
+    let vs=v.length?`<span class="badge ${confirmed(k,'vitamina')?'ok':'wait'}">Vitaminas: ${confirmed(k,'vitamina')?'Confirmadas':'Pendentes'}</span>`:'';
+    let cs=c.length?`<span class="badge ${confirmed(k,'vacina')?'ok':'wait'}">Vacinas: ${confirmed(k,'vacina')?'Confirmadas':'Pendentes'}</span>`:'';
+    let dateLabel=`${fmtDate(k)}<small class="weekday">${weekDays[z.getDay()]}</small>${active&&D.lot?.date?`<small class="weekday">Lote: Dia ${Math.floor((new Date(k+'T12:00:00')-new Date(D.lot.date+'T12:00:00'))/86400000)+1}</small>`:''}`;
+    h+=`<tr class="${newWeek?'week-start ':''}${prev?'prev-month ':''}${beforeLot?'before-lot':''}"><td>${dateLabel}</td><td>${showNames?`<span class="shift-name">${E(pname(s.m))}</span>`:'—'}</td><td>${showNames?`<span class="shift-name">${E(pname(s.t))}</span>`:'—'}</td><td>${showNames?`<span class="shift-name">${E(pname(s.n))}</span>`:'—'}</td><td>${active?(o.confirmed?'<b>'+o.value+'</b>':dc+'/3'):'—'}</td><td>${active?(v.length?v.map(x=>`<span class="badge ${confirmed(k,'vitamina')?'ok':'wait'}">💊 ${E(x.name)} ${confirmed(k,'vitamina')?'✓':'...'}</span>`).join(''):'—'):'—'}</td><td>${active?(c.length?c.map(x=>`<span class="badge ${confirmed(k,'vacina')?'ok':'wait'}">💉 ${E(x.name)} ${confirmed(k,'vacina')?'✓':'...'}</span>`).join(''):'—'):'—'}</td><td>${active?`<div class="status-stack">${os}${vs?'<span>'+vs+'</span>':''}${cs?'<span>'+cs+'</span>':''}</div>`:'—'}</td></tr>`;
+    const shiftCard=(label,val,icon)=>`<div class="shift-box"><small>${icon} ${label}</small><b>${showNames?E(pname(val)):'—'}</b></div>`;
+    const deathText=!active?'—':o.confirmed?`<b>${o.value}</b> <span class="badge ok">Confirmado</span>`:dc?`<b>${dc}/3</b> <span class="badge wait">Por confirmar</span>`:'Sem registo';
+    const vitText=!active?'—':v.length?v.map(x=>`<span class="badge ${confirmed(k,'vitamina')?'ok':'wait'}">${E(x.name)} ${confirmed(k,'vitamina')?'✓':'⏳'}</span>`).join(''):'Sem programação';
+    const vacText=!active?'—':c.length?c.map(x=>`<span class="badge ${confirmed(k,'vacina')?'ok':'wait'}">${E(x.name)} ${confirmed(k,'vacina')?'✓':'⏳'}</span>`).join(''):'Sem programação';
+    const cardStatus=active?`<div class="status-stack">${os}${vs?'<span>'+vs+'</span>':''}${cs?'<span>'+cs+'</span>':''}</div>`:'<span class="badge none">Antes da entrada do lote</span>';
+    cards+=`<article class="day-card ${beforeLot?'before-lot':''} ${prev?'prev-month':''}"><div class="day-card-head"><strong>${weekDays[z.getDay()]}, ${fmtDate(k)}</strong>${active?(o.confirmed?'<span class="badge ok">Confirmado</span>':div?'<span class="badge err">Divergência</span>':dc?'<span class="badge wait">Pendente</span>':'<span class="badge none">Sem registo</span>'):'<span class="badge none">Pré-lote</span>'}</div><div class="day-card-body">${showNames?`<div class="muted" style="margin-bottom:7px;font-weight:bold">Escala semanal</div><div class="shift-grid">${shiftCard('Manhã',s.m,'🌅')}${shiftCard('Tarde',s.t,'☀️')}${shiftCard('Noite',s.n,'🌙')}</div>`:''}<div class="day-details"><div class="detail-box"><small>⚰️ Óbitos</small><div>${deathText}</div></div><div class="detail-box"><small>💊 Vitaminas</small><div>${vitText}</div></div><div class="detail-box"><small>💉 Vacinas</small><div>${vacText}</div></div><div class="detail-box"><small>📌 Estado</small><div>${cardStatus}</div></div></div>${active&&D.lot?.date?`<div class="muted" style="margin-top:8px">Dia ${Math.floor((new Date(k+'T12:00:00')-new Date(D.lot.date+'T12:00:00'))/86400000)+1} do lote</div>`:''}</div></article>`;
+  }
+  $('tb').innerHTML=h;$('cardsView').innerHTML=cards;applyRecordsView();
+}
+function canRegister(k){
+  const today=todayKey();
+  const yesterdayDate=new Date(today+'T12:00:00');
+  yesterdayDate.setDate(yesterdayDate.getDate()-1);
+  const yesterday=yesterdayDate.getFullYear()+'-'+String(yesterdayDate.getMonth()+1).padStart(2,'0')+'-'+String(yesterdayDate.getDate()).padStart(2,'0');
+  return k===today||k===yesterday;
+}
+function dateRule(k){
+  const today=todayKey();
+  if(k>today)return 'Data futura: ainda não pode registar.';
+  const y=new Date(today+'T12:00:00');y.setDate(y.getDate()-1);
+  const yesterday=y.getFullYear()+'-'+String(y.getMonth()+1).padStart(2,'0')+'-'+String(y.getDate()).padStart(2,'0');
+  return k===yesterday?'Registo permitido até ao fim de hoje.':'Só pode registar óbitos de hoje ou de ontem.';
+}
+function mineR(){
+  let m=+$('month').value,y=+$('year').value,a=[];
+  for(let d=1;d<=days(m,y);d++)if(ids(d,m,y).includes(me.index))a.push(d);
+  $('mineBox').innerHTML=a.length?a.map(d=>{
+    let k=key(m,y,d),o=D.deaths[k]||{},p=plans(k,'vitamina').concat(plans(k,'vacina')),sch=scheduleFor(k)||{},locked=o.confirmed,allowed=canRegister(k);
+    return `<div class="week"><b>Dia ${d}</b> <span class="muted">${fmtDate(k)}</span><div class="muted">Escala: 🌅 ${E(pname(sch.m))} • ☀️ ${E(pname(sch.t))} • 🌙 ${E(pname(sch.n))}</div><label>Meu número de óbitos</label><div class="row"><div class="f"><input id="death_${k}" type="number" min="0" ${locked||!allowed?'disabled':''} value="${o.por?.[me.id]??''}" placeholder="Número de óbitos"></div><button type="button" ${locked||!allowed?'disabled':''} onclick="saveDeath('${k}')">💾 Guardar óbitos</button></div><div class="muted" style="margin:6px 0">${locked?'🔒 Óbito confirmado e bloqueado':allowed?'Depois de guardar, os outros 2 escalados devem confirmar o mesmo número.':'⏳ '+dateRule(k)}</div><div>${p.map(x=>{let lk=confirmed(k,x.type),ok=allowed&&!lk;return`<label style="display:inline-block"><input type="checkbox" ${((D.checks[k+'_'+x.type]||{})[me.id])?'checked':''} ${ok?'':'disabled'} onchange="check('${k}','${x.type}',this.checked)"> ${x.type==='vitamina'?'💊':'💉'} ${E(x.name)} ${lk?'✓ Confirmada':''}</label>`}).join('')||'Sem programação.'}</div><div class="muted">Óbito: ${o.confirmed?'🔒 confirmado':Object.keys(o.por||{}).length+'/3 registros'}</div></div>`
+  }).join(''):'Não há dias escalados para si neste mês. Confirme se a escala semanal foi preenchida no Painel ADM.';
+}
+function saveDeath(k){if(!me?.worker)return;if(!canRegister(k))return alert('Só é possível registar hoje ou ontem.');if(D.deaths[k]?.confirmed)return alert('Este óbito já foi confirmado e está bloqueado.');let el=document.getElementById('death_'+k);if(!el)return;let raw=el.value.trim();if(raw==='')return alert('Informe o número de óbitos antes de guardar.');let v=Math.max(0,+raw||0);D.deaths[k]??={por:{}};D.deaths[k].por[me.id]=v;let z=new Date(k+'T12:00:00'),a=ids(z.getDate(),z.getMonth(),z.getFullYear()).map(i=>D.deaths[k].por['W'+i]).filter(x=>x!==undefined);D.deaths[k].confirmed=a.length===3&&a.every(x=>x===a[0]);if(D.deaths[k].confirmed){D.deaths[k].value=a[0];audit('ÓBITO',k,'Confirmado pelos 3 escalados: '+a[0])}else audit('ÓBITO',k,me.name+' guardou '+v);save();render();alert(D.deaths[k].confirmed?'Óbito confirmado pelos 3 escalados.':'Registo guardado. Aguardando os outros escalados.');}
+function check(k,t,on){if(!canRegister(k))return alert('Só é possível registar hoje ou ontem.');if(confirmed(k,t))return alert('Esta confirmação já foi concluída pelos 3 escalados e está bloqueada.');D.checks[k+'_'+t]??={};D.checks[k+'_'+t][me.id]=on;audit(t==='vitamina'?'VITAMINA':'VACINA',k,me.name+(on?' marcou ✓':' retirou a marcação'));if(confirmed(k,t))audit(t==='vitamina'?'VITAMINA':'VACINA',k,'Confirmada pelos 3 escalados');save();render()}
+function admR(){fillSync();supBox.innerHTML=D.supervisors.map((u,i)=>`<div class="row"><div class="f"><label>Supervisor ${i+1}</label><input id="sn${i}" value="${E(u.name)}"></div><div class="f"><label>PIN</label><input id="sp${i}" value="${E(u.pin)}"></div></div>`).join('');workerBox.innerHTML=D.workers.map((u,i)=>`<div class="row"><div class="f"><label>Escalado ${i+1}</label><input id="wn${i}" value="${E(u.name)}"></div><div class="f"><label>PIN</label><input id="wp${i}" value="${E(u.pin)}"></div></div>`).join('');let m=+month.value,y=+year.value,h='';let first=new Date(y,m,1,12),day=first.getDay(),diff=day===0?-6:1-day,startDate=new Date(y,m,1+diff,12),last=new Date(y,m,days(m,y),12);for(let z=new Date(startDate);z<=last;z.setDate(z.getDate()+7)){let wk=z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0'),su=new Date(z);su.setDate(su.getDate()+6);let s=D.schedule[wk]||{};let label=z.toLocaleDateString('pt-PT',{day:'2-digit',month:'2-digit',year:'numeric'})+' → '+su.toLocaleDateString('pt-PT',{day:'2-digit',month:'2-digit',year:'numeric'});h+=`<div class="week"><b>Semana: ${label}</b><div class="muted">Segunda a domingo • 3 trabalhadores diferentes: manhã, tarde e noite.</div><div class="row">${[['m','🌅 Manhã'],['t','☀️ Tarde'],['n','🌙 Noite']].map(q=>`<div class="f"><label>${q[1]}</label><select onchange="setS('${wk}','${q[0]}',this.value)"><option value="">Selecionar</option>${D.workers.map((u,i)=>`<option value="${i}" ${String(s[q[0]])===String(i)?'selected':''}>${E(u.name||'Escalado '+(i+1))}</option>`).join('')}</select></div>`).join('')}</div></div>`}schedule.innerHTML=h;lotName.value=D.lot.name||'';lotDate.value=D.lot.date||'';lotQty.value=D.lot.qty||'';vitList.innerHTML=listP('vitamina');vacList.innerHTML=listP('vacina');auditBox()}
+function savePeople(){D.supervisors=D.supervisors.map((u,i)=>({name:$('sn'+i).value.trim(),pin:$('sp'+i).value.trim()||'0000'}));D.workers=D.workers.map((u,i)=>({name:$('wn'+i).value.trim(),pin:$('wp'+i).value.trim()||'0000'}));audit('CONFIG','—','ADM alterou cadastro');save();init();render();alert('Cadastro guardado.')}
+function setS(wk,t,v){D.schedule[wk]??={};if(v!==''&&['m','t','n'].some(x=>x!==t&&String(D.schedule[wk][x])===String(v))){alert('Este trabalhador já está noutra função nesta semana. Escolha outro.');render();return}D.schedule[wk][t]=v;audit('ESCALA',wk,`ADM alterou semana ${wk}`);save();render()}
+function saveLot(){let n=lotName.value.trim(),d=lotDate.value,q=Math.max(0,+lotQty.value||0);if(!d||!q)return alert('Informe a data de entrada e a quantidade inicial dos pintos.');D.lot={name:n||'Lote',date:d,qty:q};audit('LOTE',d,`ADM registou ${n||'Lote'} com ${q} pintos`);save();render();alert('Lote guardado.')}
+function clearLot(){if(!confirm('Limpar os dados do lote atual? Os registos de óbitos não serão apagados.'))return;D.lot={name:'',date:'',qty:0};audit('LOTE','—','ADM limpou os dados do lote');save();render()}
+function addPlan(t){let d=t==='vitamina'?vd.value:cd.value,n=t==='vitamina'?vn.value.trim():cn.value.trim();if(!d||!n)return alert('Preencha a data e o nome.');D.plans.push({id:Date.now(),date:d,name:n,type:t});audit(t.toUpperCase(),d,'ADM programou '+n);save();render()}
+function listP(t){let a=D.plans.filter(x=>x.type===t).sort((a,b)=>a.date.localeCompare(b.date));return a.map(x=>`<div class="week"><b>${fmtDate(x.date)}</b> — ${E(x.name)} <button type="button" class="danger" onclick="delP(${x.id})">Eliminar</button></div>`).join('')||'Nenhuma programação.'}
+function delP(id){let x=D.plans.find(p=>p.id===id);if(x)audit('CONFIG',x.date,'ADM eliminou '+x.name);D.plans=D.plans.filter(x=>x.id!==id);save();render()}
+function auditBox(){$('audit').innerHTML=D.audit.length?D.audit.slice(0,80).map(a=>`<div class="audit"><b>${E(a.type)}</b> • ${E(a.date)}<br>${E(a.time)} — ${E(a.text)}</div>`).join(''):'Sem histórico.'}
+function backup(){
+  const data=JSON.stringify(D,null,2),filename='NosAviario_backup_'+todayKey()+'.json';
+  audit('BACKUP','—','ADM preparou uma cópia dos dados');save();
+  // Se a casca WebView expuser uma ponte nativa, utiliza-a para guardar o ficheiro.
+  try{if(window.Android&&typeof window.Android.saveFile==='function'){window.Android.saveFile(filename,data);alert('Pedido de exportação enviado à casca WebView.');return;}}catch(e){}
+  try{
+    const blob=new Blob([data],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=filename;a.style.display='none';document.body.appendChild(a);a.click();
+    setTimeout(()=>{try{URL.revokeObjectURL(url);a.remove()}catch(e){}},1500);
+    // Alguns WebViews não têm DownloadListener: disponibiliza o conteúdo para copiar manualmente.
+    setTimeout(()=>{if(!document.hidden){const offer=confirm('Se o ficheiro não foi descarregado pela casca WebView, quer abrir o texto do backup para copiar?');if(offer)showBackupText(data)}},500);
+  }catch(e){showBackupText(data)}
+}
+function showBackupText(data){
+  const w=window.open('','_blank');
+  if(w){w.document.open();w.document.write('<meta charset="utf-8"><title>Backup NosAviário</title><h3>Backup NosAviário</h3><p>Copie todo o texto e guarde num ficheiro .json.</p><textarea style="width:100%;height:75vh;font-size:12px"></textarea>');w.document.close();w.document.querySelector('textarea').value=data;return;}
+  alert('A casca WebView não permite descarregar ou abrir uma janela. Active os downloads no WebView ou adicione um botão nativo de exportação.');
+}function restore(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.adminPin||!Array.isArray(x.supervisors)||!Array.isArray(x.workers)||!Array.isArray(x.plans)){throw new Error('formato')}if(!confirm('Restaurar este backup? Os dados atuais serão substituídos.'))return;D=x;save();location.reload()}catch(e){alert('Backup inválido ou danificado.')}};r.readAsText(f)}
+function changePin(){let p=newPin.value.trim();if(!p)return alert('Digite um PIN.');D.adminPin=p;save();newPin.value='';alert('PIN ADM alterado.')}
+function resetAll(){if(confirm('APAGAR TODOS OS DADOS?')){localStorage.removeItem(KEY);localStorage.removeItem('NOSAVIARIO_V5');localStorage.removeItem('NOSAVIARIO_V4');location.reload()}}
+$('month').onchange=render;$('year').onchange=render;init();
+
+/* ===== V8: sincronização offline-first ===== */
+const SYNC_CFG_KEY='NOSAVIARIO_SYNC_CFG';
+let syncBusy=false;
+function syncCfg(){
+  try{return JSON.parse(localStorage.getItem(SYNC_CFG_KEY)||'{}')}catch(e){return {}}
+}
+function saveSyncConfig(){
+  if(!me?.admin)return alert('Somente o ADM pode configurar a sincronização.');
+  const url=document.getElementById('syncUrl')?.value.trim()||'';
+  const token=document.getElementById('syncToken')?.value.trim()||'';
+  if(!url||!token)return alert('Informe o endereço e o token.');
+  localStorage.setItem(SYNC_CFG_KEY,JSON.stringify({url,token}));
+  setSyncStatus('Configuração guardada.','ok');
+  alert('Configuração de sincronização guardada neste celular.');
+}
+function setSyncStatus(msg,type=''){
+  const a=document.getElementById('syncStatus'),b=document.getElementById('globalSync');
+  const cls=type==='ok'?'syncok':type==='err'?'syncerr':type==='wait'?'syncwait':'';
+  if(a)a.innerHTML='<span class="'+cls+'">'+E(msg)+'</span>';
+  if(b)b.innerHTML='☁️ '+E(msg);
+}
+function fillSync(){
+  const c=syncCfg();
+  const u=document.getElementById('syncUrl'),t=document.getElementById('syncToken');
+  if(u)u.value=c.url||'';
+  if(t)t.value=c.token||'';
+}
+function stampData(){
+  D._meta=D._meta||{};
+  D._meta.updatedAt=new Date().toISOString();
+  D._meta.deviceId=D._meta.deviceId||('dev-'+Math.random().toString(36).slice(2)+Date.now().toString(36));
+  return D;
+}
+function mergeObjects(local,remote){
+  if(!remote||typeof remote!=='object')return local;
+  const out=(typeof structuredClone==='function')?structuredClone(local):JSON.parse(JSON.stringify(local));
+  for(const k of Object.keys(remote)){
+    if(k==='_meta')continue;
+    const rv=remote[k],lv=out[k];
+    if(rv&&typeof rv==='object'&&!Array.isArray(rv)&&lv&&typeof lv==='object'&&!Array.isArray(lv)){
+      out[k]=mergeObjects(lv,rv);
+    }else if(Array.isArray(rv)){
+      // Plans/audit são combinados sem duplicar; outros arrays seguem a versão remota.
+      if(k==='plans'||k==='audit'){
+        const all=[...(Array.isArray(lv)?lv:[]),...rv];
+        const seen=new Set();
+        out[k]=all.filter(x=>{const id=JSON.stringify(x);if(seen.has(id))return false;seen.add(id);return true});
+      }else out[k]=rv;
+    }else if(rv!==undefined){
+      out[k]=rv;
+    }
+  }
+  return out;
+}
+async function syncNow(){
+  if(syncBusy)return;
+  const c=syncCfg();
+  if(!c.url||!c.token){
+    if(me?.admin){alert('Configure primeiro o endereço e o token de sincronização.');}
+    else setSyncStatus('Sincronização ainda não configurada.','wait');
+    return;
+  }
+  syncBusy=true; setSyncStatus('Sincronizando...','wait');
+  try{
+    stampData(); save();
+    const payload={token:c.token,data:D};
+    const r=await fetch(c.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const j=await r.json();
+    if(!j.ok)throw new Error(j.error||'Servidor recusou a sincronização');
+    if(j.data){
+      D=mergeObjects(D,j.data);
+      D._meta=D._meta||{};
+      D._meta.lastSyncAt=new Date().toISOString();
+      save();
+    }
+    setSyncStatus('Sincronizado em '+new Date().toLocaleString('pt-PT'),'ok');
+    render();
+  }catch(e){
+    setSyncStatus('Sem sincronização agora — os dados locais continuam guardados.','err');
+  }finally{syncBusy=false}
+}
+function maybeSync(){
+  const c=syncCfg();
+  if(c.url&&c.token&&navigator.onLine)syncNow();
+}
+window.addEventListener('online',()=>setTimeout(maybeSync,1200));
+
+</script>
+<script>
+/* Compatibilidade adicional para cascas Android WebView */
+(function(){
+  try {
+    // Impede que botões dentro de eventuais formulários provoquem recarregamento involuntário.
+    document.querySelectorAll('button').forEach(function(b){ if(!b.hasAttribute('type')) b.type='button'; });
+    // O WebView pode recriar os botões de navegação dinamicamente; aplica type após cada renderização.
+    var observer=new MutationObserver(function(mutations){mutations.forEach(function(m){m.addedNodes.forEach(function(n){if(n.nodeType===1){if(n.tagName==='BUTTON'&&!n.hasAttribute('type'))n.type='button';if(n.querySelectorAll)n.querySelectorAll('button:not([type])').forEach(function(b){b.type='button'});}})});});
+    observer.observe(document.body,{childList:true,subtree:true});
+    // Botões com onclick inline continuam a executar normalmente no WebView com JavaScript activo.
+    window.addEventListener('error',function(ev){try{console.error('NosAviário:',ev.message,ev.filename,ev.lineno)}catch(e){}});
+  } catch(e) {}
+})();
+</script>
+
+</body></html>
